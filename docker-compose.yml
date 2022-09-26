@@ -29,3 +29,28 @@ services:
       WORDPRESS_DB_PASSWORD: KhcwtBvD5ygAu
     volumes:
       - ./wordpress:/var/www/html
+  
+  wordpress-cli:
+    depends_on:
+      - db
+      - wordpress
+    user: "33:33"
+    image: wordpress:cli
+    environment:
+      WORDPRESS_DB_NAME: wordpress-example
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wpExampleUser
+      WORDPRESS_DB_PASSWORD: KhcwtBvD5ygAu
+    command: >
+      /bin/sh -c '
+      sleep 10;
+      wp core install --path=/var/www/html \
+                      --url="http://localhost:8000" \
+                      --title="wordpress-example" \
+                      --admin_user=wpExampleUser \
+                      --admin_password=wpExampleUser \
+                      --admin_email=wp.example@example.com;
+      wp theme install colormag --activate --allow-root;
+      '
+    volumes:
+      - ./wordpress:/var/www/html
