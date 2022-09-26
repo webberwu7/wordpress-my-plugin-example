@@ -3,8 +3,6 @@ version: '3.3'
 services:
   db:
     image: mysql:5.7
-    volumes:
-      - ./db/data/mysql:/var/lib/mysql
     restart: always
     environment:
       - MYSQL_DATABASE=wordpress-example
@@ -14,6 +12,8 @@ services:
       - TZ=UTC
     ports:
       - 33060:3306
+    volumes:
+      - ./.db/data/mysql:/var/lib/mysql
 
   wordpress:
     depends_on:
@@ -28,7 +28,7 @@ services:
       WORDPRESS_DB_USER: wpExampleUser
       WORDPRESS_DB_PASSWORD: KhcwtBvD5ygAu
     volumes:
-      - ./wordpress:/var/www/html
+      - ./.wordpress:/var/www/html
   
   wordpress-cli:
     depends_on:
@@ -51,6 +51,7 @@ services:
                       --admin_password=wpExampleUser \
                       --admin_email=wp.example@example.com;
       wp theme install colormag --activate --allow-root;
+      wp plugin install aryo-activity-log --activate --allow-root;
       '
     volumes:
-      - ./wordpress:/var/www/html
+      - ./.wordpress:/var/www/html
