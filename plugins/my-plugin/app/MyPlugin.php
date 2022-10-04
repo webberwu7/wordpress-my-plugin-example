@@ -3,6 +3,7 @@
 namespace MyPlugin;
 
 use MyPlugin\Controllers\AdminPageController;
+use MyPlugin\Controllers\SettingController;
 
 class MyPlugin
 {
@@ -11,6 +12,7 @@ class MyPlugin
     public function __construct()
     {
         $this->adminPageController = new AdminPageController();
+        $this->settingController = new SettingController();
     }
 
     public function plugin_init()
