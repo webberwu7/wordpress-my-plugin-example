@@ -24,14 +24,29 @@ class WpOption
         }
     }
 
+    public function getOptions(): array
+    {
+        $response = [];
+        foreach ($this->optionNames as $optionName) {
+            $response[$optionName] = $this->get($optionName);
+        }
+
+        return $response;
+    }
+
+    public function setOptions($options): bool|array
+    {
+        foreach ($options as $key => $value) {
+            $this->set($key, $value);
+        }
+
+        return $this->getOptions();
+    }
+
     public function get($optionName): false|string
     {
         if (in_array($optionName, $this->optionNames)) {
-            $option = $this->is_const_defined($optionName);
-            if (!$this->is_const_defined($optionName))
-                return get_option($optionName);
-
-            return $option;
+            return get_option($optionName);
         }
 
         return false;
@@ -46,18 +61,18 @@ class WpOption
         return update_option($optionName, $value);
     }
 
-    public function is_const_defined($optionName): false|string
-    {
-        $return = false;
-        switch ($optionName) {
-            case 'token':
-                $return = defined('MY_PLUGIN_TOKEN') && MY_PLUGIN_TOKEN;
-                break;
-            case 'project':
-                $return = defind('MY_PLUGIN_PROJECT') && MY_PLUGIN_PROJECT;
-                break;
-        }
+    // public function is_const_defined($optionName): false|string
+    // {
+    //     $return = false;
+    //     switch ($optionName) {
+    //         case 'token':
+    //             $return = defined('MY_PLUGIN_TOKEN') && MY_PLUGIN_TOKEN;
+    //             break;
+    //         case 'project':
+    //             $return = defined('MY_PLUGIN_PROJECT') && MY_PLUGIN_PROJECT;
+    //             break;
+    //     }
 
-        return $return;
-    }
+    //     return $return;
+    // }
 }
