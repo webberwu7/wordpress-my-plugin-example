@@ -1,0 +1,24 @@
+openapi: 3.0.0
+info:
+  title: 'Wordpress My Plugin API 文件'
+  description: 'Wordpress My Plugin API 文件'
+  contact:
+    email: nmmn1501@gmail.com
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost:8000/?rest_route='
+    description: 本地端
+paths:
+  /my-plugin/v1/health-check:
+    get:
+      tags:
+        - 'health check'
+      summary: 'health check'
+      description: 'health check'
+      operationId: 'health check'
+      responses:
+        '200':
+          description: 'plugin health check'
+        '500':
+          description: 伺服器錯誤，請聯絡工程師
