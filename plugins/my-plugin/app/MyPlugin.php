@@ -18,11 +18,14 @@ class MyPlugin
 
     public function __construct()
     {
+        // page controller
         $this->adminPageController = new AdminPageController();
-        $this->settingController = new SettingController();
-        $this->wpOptionController = new WpOptionController();
 
+        // setting controller
+        $this->settingController = new SettingController();
+        
         // api controller
+        $this->wpOptionController = new WpOptionController();
         $this->healthCheckController = new HealthCheckController();
     }
 

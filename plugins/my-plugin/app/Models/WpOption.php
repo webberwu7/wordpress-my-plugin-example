@@ -4,9 +4,6 @@ namespace MyPlugin\Models;
 
 class WpOption
 {
-    // Wordpress Option Group Name
-    public $optionGroup = "my_plugin_options";
-
     // Options in this group 
     public $optionNames = [
         "token", "project"
@@ -60,19 +57,4 @@ class WpOption
 
         return update_option($optionName, $value);
     }
-
-    // public function is_const_defined($optionName): false|string
-    // {
-    //     $return = false;
-    //     switch ($optionName) {
-    //         case 'token':
-    //             $return = defined('MY_PLUGIN_TOKEN') && MY_PLUGIN_TOKEN;
-    //             break;
-    //         case 'project':
-    //             $return = defined('MY_PLUGIN_PROJECT') && MY_PLUGIN_PROJECT;
-    //             break;
-    //     }
-
-    //     return $return;
-    // }
 }
